@@ -1,660 +1,349 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Perfil Acadêmico</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Acadêmico - Maria Camila Osorio Ortiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --brand-color: #04C9C9;
+            --bg-color: #f0f4f4;
+            --text-color: #333;
+        }
 
-    :root {
-      --ink:        #1a1a2e;
-      --muted:      #5a5a7a;
-      --accent:     #04C9C9;
-      --gold:       #04C9C9;
-      --bg:         #f7f5f0;
-      --card:       #ffffff;
-      --border:     #e2ddd6;
-      --shadow:     0 4px 24px rgba(4,201,201,.10);
-    }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0; padding: 0;
+            line-height: 1.6;
+        }
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      min-height: 100vh;
-      padding: 0;
-    }
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+            padding: 0 20px;
+        }
 
-    /* ── HEADER STRIP ── */
-    .header-strip {
-      background: #04C9C9;
-      height: 6px;
-      width: 100%;
-    }
+        /* SIDEBAR */
+        .sidebar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-    /* ── LAYOUT ── */
-    .page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 40px;
-      align-items: start;
-    }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
 
-    /* ── SIDEBAR ── */
-    .sidebar {
-      position: sticky;
-      top: 32px;
-    }
+        .profile-card {
+            border-top: 6px solid var(--brand-color);
+            text-align: center;
+        }
 
-    .profile-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px 24px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      animation: fadeUp .5s ease both;
-    }
+        .profile-img {
+            width: 110px; height: 110px;
+            background-color: #eee;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 40px; color: #ccc;
+        }
 
-    .avatar-wrap {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
+        .name-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--primary-color);
+            margin: 0;
+        }
 
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--border);
-      background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      color: #888;
-    }
+        .affiliation {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 15px 0 20px;
+        }
 
-    .avatar-ring {
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      opacity: .5;
-    }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
 
-    .profile-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
+        .stats-table td {
+            padding: 8px 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #f9f9f9;
+            text-align: left;
+        }
 
-    .profile-role {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 400;
-      margin-bottom: 4px;
-      line-height: 1.5;
-    }
+        .stat-val {
+            text-align: right !important;
+            font-weight: 600;
+        }
 
-    .profile-institution {
-      font-size: 13px;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
+        .stats-title {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--brand-color);
+            margin: 20px 0 10px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
 
-    .profile-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
+        .interests-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #555;
+        }
 
-    .tag {
-      background: #f0ede8;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 500;
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      cursor: default;
-      transition: background .2s, color .2s;
-    }
-    .tag:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .interests-list li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
 
-    .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+        .interests-list li::before {
+            content: "•";
+            color: var(--brand-color);
+            font-weight: bold;
+            margin-right: 8px;
+        }
 
-    /* ── STATS ── */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
+        /* BOTONES REDES */
+        .social-block {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    .stat-cell {
-      background: var(--card);
-      padding: 14px 8px;
-      text-align: center;
-    }
+        .btn-link {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: white;
+            color: var(--brand-color);
+            border: 2px solid var(--brand-color);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
 
-    .stat-label {
-      font-size: 10px;
-      color: var(--muted);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-bottom: 4px;
-    }
+        .btn-link:hover {
+            background-color: var(--brand-color);
+            color: white;
+        }
 
-    .stat-value {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 9px;
-      color: var(--muted);
-    }
+        /* MAIN CONTENT */
+        .main-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
 
-    /* ── LINKS ── */
-    .profile-links { list-style: none; }
-    .profile-links li + li { margin-top: 8px; }
-    .profile-links a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--ink);
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      transition: background .2s, border-color .2s;
-    }
-    .profile-links a:hover { background: #f0ede8; border-color: var(--gold); }
-    .link-icon { font-size: 15px; }
+        h2 {
+            margin-top: 0;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
-    /* ── MAIN CONTENT ── */
-    .main { animation: fadeUp .5s .1s ease both; }
+        .article {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f2f2f2;
+        }
 
-    /* ── SECTION TITLE ── */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--border);
-    }
+        .article-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--brand-color);
+            text-decoration: none;
+        }
 
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--ink);
-    }
+        .article-title:hover {
+            text-decoration: underline;
+        }
 
-    .section-count {
-      font-size: 12px;
-      color: var(--muted);
-      background: #f0ede8;
-      border-radius: 20px;
-      padding: 2px 10px;
-      font-weight: 500;
-    }
+        .article-authors {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 5px 0;
+        }
 
-    /* ── CITATION CHART ── */
-    .chart-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px 28px 20px;
-      box-shadow: var(--shadow);
-      margin-bottom: 32px;
-    }
+        .article-journal {
+            font-size: 0.85rem;
+            color: #888;
+            font-style: italic;
+        }
 
-    .chart-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 16px;
-    }
+        .article-footer {
+            margin-top: 10px;
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
 
-    .bar-chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 4px;
-      height: 80px;
-    }
+        .cite-tag {
+            color: #03a3a3;
+            background: rgba(4, 201, 201, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
 
-    .bar-wrap {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      height: 100%;
-      justify-content: flex-end;
-    }
-
-    .bar {
-      width: 100%;
-      background: linear-gradient(to top, #04C9C9, #02e8e8);
-      border-radius: 3px 3px 0 0;
-      transition: opacity .2s;
-      position: relative;
-    }
-    .bar:hover { opacity: .8; }
-
-    .bar-year {
-      font-size: 9px;
-      color: var(--muted);
-      writing-mode: horizontal-tb;
-      transform: none;
-    }
-
-    /* ── PUBLICATIONS ── */
-    .pub-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
-
-    .pub-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 22px;
-      box-shadow: var(--shadow);
-      transition: border-color .2s, transform .2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .pub-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--accent);
-      transform: scaleY(0);
-      transition: transform .2s;
-      border-radius: 3px;
-    }
-    .pub-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .pub-card:hover::before { transform: scaleY(1); }
-
-    .pub-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.45;
-      margin-bottom: 6px;
-      text-decoration: none;
-      display: block;
-    }
-    .pub-title:hover { color: var(--accent); }
-
-    .pub-authors {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .pub-venue {
-      font-size: 12px;
-      color: var(--muted);
-      font-style: italic;
-      margin-bottom: 8px;
-    }
-
-    .pub-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .cite-badge {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--accent);
-      background: rgba(4,201,201,.10);
-      border-radius: 20px;
-      padding: 2px 10px;
-    }
-
-    .pub-year {
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    /* ── CO-AUTHORS ── */
-    .coauthors-section { margin-bottom: 32px; }
-
-    .coauthor-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
-    }
-
-    .coauthor-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: var(--shadow);
-      transition: border-color .2s;
-      text-decoration: none;
-      color: inherit;
-    }
-    .coauthor-card:hover { border-color: var(--gold); }
-
-    .coauthor-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #e0dbd4, #c8c2b8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .coauthor-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--ink);
-      line-height: 1.3;
-    }
-
-    .coauthor-affil {
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 800px) {
-      .page { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-    }
-  </style>
+        @media (max-width: 850px) {
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="header-strip"></div>
+<div class="container">
+    <div class="sidebar-container">
+        <div class="card profile-card">
+            <div class="profile-img">👤</div>
+            <div class="name-main">Maria Camila</div>
+            <div class="name-main">Osorio Ortiz</div>
+            <div class="affiliation">Mestra do PPGICAL, UNILA</div>
+            
+            <div class="stats-title">Citações</div>
+            <table class="stats-table">
+                <tr><td>Citações</td><td class="stat-val">18</td></tr>
+                <tr><td>Índice h</td><td class="stat-val">2</td></tr>
+                <tr><td>Índice i10</td><td class="stat-val">1</td></tr>
+            </table>
 
-<div class="page">
-
-  <!-- ══ SIDEBAR ══ -->
-  <aside class="sidebar">
-    <div class="profile-card">
-
-      <div class="avatar-wrap">
-        <div class="avatar">👤</div>
-        <!-- Para usar foto real: <img src="foto.jpg" class="avatar" alt="Foto"> -->
-        <div class="avatar-ring"></div>
-      </div>
-
-      <h1 class="profile-name">Nome do Pesquisador</h1>
-      <p class="profile-role">Professor Associado · Departamento de [Área]</p>
-      <p class="profile-institution">Universidade / Instituição</p>
-
-      <div class="profile-tags">
-        <span class="tag">Área de Pesquisa 1</span>
-        <span class="tag">Área de Pesquisa 2</span>
-        <span class="tag">Área de Pesquisa 3</span>
-        <span class="tag">Área de Pesquisa 4</span>
-        <span class="tag">Área de Pesquisa 5</span>
-      </div>
-
-      <hr class="divider">
-
-      <!-- MÉTRICAS -->
-      <div class="stats-grid">
-        <div class="stat-cell">
-          <div class="stat-label">Citações</div>
-          <div class="stat-value">1.240</div>
-          <div class="stat-since">desde 2018: 980</div>
+            <div class="stats-title">Áreas de Interesse</div>
+            <ul class="interests-list">
+                <li>Roteiro</li>
+                <li>Direção</li>
+                <li>Montagem</li>
+                <li>Curadoria</li>
+                <li>Epistemologias e Práticas Feministas</li>
+                <li>LGBTQIAPN+</li>
+            </ul>
         </div>
-        <div class="stat-cell">
-          <div class="stat-label">Índice h</div>
-          <div class="stat-value">18</div>
-          <div class="stat-since">desde 2018: 15</div>
+
+        <div class="card social-block">
+            <div class="stats-title" style="margin-top:0">Links Acadêmicos</div>
+            <a href="http://lattes.cnpq.br/" class="btn-link" target="_blank">Currículo Lattes</a>
+            <a href="https://orcid.org/" class="btn-link" target="_blank">ORCID</a>
+            <a href="https://scholar.google.com/citations?user=9IpAuPwAAAAJ" class="btn-link" target="_blank">Google Scholar</a>
         </div>
-        <div class="stat-cell">
-          <div class="stat-label">Índice i10</div>
-          <div class="stat-value">24</div>
-          <div class="stat-since">desde 2018: 20</div>
-        </div>
-      </div>
-
-      <hr class="divider">
-
-      <!-- LINKS -->
-      <ul class="profile-links">
-        <li>
-          <a href="mailto:email@universidade.br">
-            <span class="link-icon">✉️</span> email@universidade.br
-          </a>
-        </li>
-        <li>
-          <a href="https://scholar.google.com" target="_blank">
-            <span class="link-icon">🎓</span> Google Scholar
-          </a>
-        </li>
-        <li>
-          <a href="https://orcid.org" target="_blank">
-            <span class="link-icon">🔗</span> ORCID
-          </a>
-        </li>
-        <li>
-          <a href="http://lattes.cnpq.br" target="_blank">
-            <span class="link-icon">📋</span> Currículo Lattes
-          </a>
-        </li>
-        <li>
-          <a href="https://researchgate.net" target="_blank">
-            <span class="link-icon">🔬</span> ResearchGate
-          </a>
-        </li>
-      </ul>
-
-    </div>
-  </aside>
-
-  <!-- ══ MAIN ══ -->
-  <main class="main">
-
-    <!-- GRÁFICO DE CITAÇÕES -->
-    <div class="chart-card">
-      <div class="chart-title">Citações por ano</div>
-      <div class="bar-chart" id="barChart"></div>
     </div>
 
-    <!-- PUBLICAÇÕES -->
-    <div class="section-header">
-      <h2 class="section-title">Publicações</h2>
-      <span class="section-count">24 artigos</span>
+    <div class="main-content">
+        <h2>Publicações</h2>
+        
+        <div class="article-list">
+            <div class="article">
+                <a href="https://revistas.unila.edu.br/epistemologiasdosul/article/view/1788" class="article-title" target="_blank">Julieta Paredes: mulheres indígenas, descolonização do feminismo e políticas do nomear</a>
+                <div class="article-authors">T Spyer, M Malheiros, MC Ortiz</div>
+                <div class="article-journal">Revista Epistemologias do Sul 3 (2), 22-42</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 11</span>
+                    <span style="color:#bbb">2019</span>
+                </div>
+            </div>
+
+            <div class="article">
+                <a href="https://revistas.unila.edu.br/epistemologiasdosul/article/view/2857" class="article-title" target="_blank">Los festivales latinoamericanos de cine de mujeres: el caso del Equis Festival de Cine Feminista de Ecuador</a>
+                <div class="article-authors">MC Ortiz, T Spyer</div>
+                <div class="article-journal">Revista Epistemologias do Sul 6 (1)</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 5</span>
+                    <span style="color:#bbb">2022</span>
+                </div>
+            </div>
+
+            <div class="article">
+                <a href="https://revistas.unila.edu.br/epistemologiasdosul/article/view/2347" class="article-title" target="_blank">Cineclube Cinelatino: memórias de integração, reflexão e práxis no contexto universitário</a>
+                <div class="article-authors">CV Paschoal, FC Veronez, MC Ortiz, SR Rodrigues</div>
+                <div class="article-journal">Revista Epistemologias do Sul 4 (2), 42-55</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 1</span>
+                    <span style="color:#bbb">2020</span>
+                </div>
+            </div>
+
+            <div class="article">
+                <a href="https://revistas.unila.edu.br/epistemologiasdosul/article/view/1782" class="article-title" target="_blank">Alex Schlenker: descolonizar a arte para retomá-la como expressão da vida</a>
+                <div class="article-authors">MR Rugeri, M Lindarte, MC Ortiz, O Freitez</div>
+                <div class="article-journal">Revista Epistemologias do Sul 3 (1), 22-35</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 1</span>
+                    <span style="color:#bbb">2019</span>
+                </div>
+            </div>
+
+            <div class="article">
+                <a href="https://periodicos.unb.br/index.php/zanzala/article/view/48366" class="article-title" target="_blank">A construção das memórias entre ficção e documentário em EAMI, de Paz Encina</a>
+                <div class="article-authors">MC Ortiz, TMS Dulci</div>
+                <div class="article-journal">Zanzalá 11, 111-137</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 0</span>
+                    <span style="color:#bbb">2023</span>
+                </div>
+            </div>
+
+            <div class="article">
+                <a href="https://periodicos.unb.br/index.php/zanzala/article/view/48360" class="article-title" target="_blank">Dossiê Cineclube Cinelatino: Experiências e reflexões cineclubistas de antes, durante e depois da pandemia da Covid-19</a>
+                <div class="article-authors">E Fér, MC Ortiz, T Spyer</div>
+                <div class="article-journal">Zanzalá-Revista Brasileira de Estudos sobre Gêneros Cinematográficos</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 0</span>
+                    <span style="color:#bbb">2023</span>
+                </div>
+            </div>
+
+            <div class="article">
+                <a href="https://periodicos.uri.br/index.php/educacao/article/view/827" class="article-title" target="_blank">Curtas brasileiros: laboratório de estéticas insurgentes e de lutas antirracistas</a>
+                <div class="article-authors">MCO Ortiz, TMS Dulci</div>
+                <div class="article-journal">Educação, Ciência e Cultura 27 (2)</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 0</span>
+                    <span style="color:#bbb">2022</span>
+                </div>
+            </div>
+
+            <div class="article">
+                <a href="https://www.revistas.usp.br/prolam/article/view/192275" class="article-title" target="_blank">A cultura no MERCOSUL: análise dos desdobramentos das cúpulas sociais nas reuniões de Ministros da Cultura (2006-2015)</a>
+                <div class="article-authors">MCO Ortiz, TMS Dulci, YW Urruth</div>
+                <div class="article-journal">Brazilian Journal of Latin American Studies 21 (42), 177-202</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 0</span>
+                    <span style="color:#bbb">2022</span>
+                </div>
+            </div>
+
+            <div class="article">
+                <a href="https://revistas.unila.edu.br/epistemologiasdosul/article/view/2861" class="article-title" target="_blank">Existências e resistências: feminismos latino-americanos-Parte 2</a>
+                <div class="article-authors">MC Ortiz, P Dorella, T Spyer</div>
+                <div class="article-journal">Revista Epistemologias do Sul 6 (1)</div>
+                <div class="article-footer">
+                    <span class="cite-tag">Citado por 0</span>
+                    <span style="color:#bbb">2022</span>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="pub-list">
-
-      <!-- Publicação 1 -->
-      <article class="pub-card">
-        <a href="#" class="pub-title">
-          Título do Artigo Científico — Uma Contribuição para o Avanço da [Área de Pesquisa]
-        </a>
-        <p class="pub-authors">Nome Completo, Coautor A, Coautor B</p>
-        <p class="pub-venue">Nome da Revista ou Congresso, 2024</p>
-        <div class="pub-meta">
-          <span class="cite-badge">★ 87 citações</span>
-          <span class="pub-year">2024</span>
-        </div>
-      </article>
-
-      <!-- Publicação 2 -->
-      <article class="pub-card">
-        <a href="#" class="pub-title">
-          Análise Comparativa de Métodos para [Problema Específico]: Uma Revisão Sistemática
-        </a>
-        <p class="pub-authors">Nome Completo, Coautor C, Coautor D, Coautor E</p>
-        <p class="pub-venue">Journal of [Field], vol. 12, n. 3, pp. 45–67, 2023</p>
-        <div class="pub-meta">
-          <span class="cite-badge">★ 134 citações</span>
-          <span class="pub-year">2023</span>
-        </div>
-      </article>
-
-      <!-- Publicação 3 -->
-      <article class="pub-card">
-        <a href="#" class="pub-title">
-          Um Novo Framework para [Aplicação]: Teoria, Implementação e Validação Experimental
-        </a>
-        <p class="pub-authors">Nome Completo, Coautor A</p>
-        <p class="pub-venue">IEEE Transactions on [Area], 2022</p>
-        <div class="pub-meta">
-          <span class="cite-badge">★ 212 citações</span>
-          <span class="pub-year">2022</span>
-        </div>
-      </article>
-
-      <!-- Publicação 4 -->
-      <article class="pub-card">
-        <a href="#" class="pub-title">
-          Deep Learning Aplicado a [Domínio]: Resultados e Perspectivas Futuras
-        </a>
-        <p class="pub-authors">Coautor F, Nome Completo, Coautor G</p>
-        <p class="pub-venue">Proceedings of the International Conference on [Field], 2021</p>
-        <div class="pub-meta">
-          <span class="cite-badge">★ 310 citações</span>
-          <span class="pub-year">2021</span>
-        </div>
-      </article>
-
-      <!-- Publicação 5 -->
-      <article class="pub-card">
-        <a href="#" class="pub-title">
-          Avaliação de Desempenho de [Técnica] em Ambientes de Alta Dimensionalidade
-        </a>
-        <p class="pub-authors">Nome Completo, Coautor H, Coautor I</p>
-        <p class="pub-venue">Pattern Recognition Letters, 2020</p>
-        <div class="pub-meta">
-          <span class="cite-badge">★ 198 citações</span>
-          <span class="pub-year">2020</span>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- CO-AUTORES -->
-    <div class="coauthors-section">
-      <div class="section-header">
-        <h2 class="section-title">Coautores</h2>
-        <span class="section-count">12 colaboradores</span>
-      </div>
-
-      <div class="coauthor-grid">
-        <a href="#" class="coauthor-card">
-          <div class="coauthor-avatar">👤</div>
-          <div>
-            <div class="coauthor-name">Coautor A</div>
-            <div class="coauthor-affil">Universidade X</div>
-          </div>
-        </a>
-        <a href="#" class="coauthor-card">
-          <div class="coauthor-avatar">👤</div>
-          <div>
-            <div class="coauthor-name">Coautor B</div>
-            <div class="coauthor-affil">Instituto Y</div>
-          </div>
-        </a>
-        <a href="#" class="coauthor-card">
-          <div class="coauthor-avatar">👤</div>
-          <div>
-            <div class="coauthor-name">Coautor C</div>
-            <div class="coauthor-affil">Universidade Z</div>
-          </div>
-        </a>
-        <a href="#" class="coauthor-card">
-          <div class="coauthor-avatar">👤</div>
-          <div>
-            <div class="coauthor-name">Coautor D</div>
-            <div class="coauthor-affil">Centro de Pesquisa W</div>
-          </div>
-        </a>
-        <a href="#" class="coauthor-card">
-          <div class="coauthor-avatar">👤</div>
-          <div>
-            <div class="coauthor-name">Coautor E</div>
-            <div class="coauthor-affil">Universidade Federal V</div>
-          </div>
-        </a>
-        <a href="#" class="coauthor-card">
-          <div class="coauthor-avatar">👤</div>
-          <div>
-            <div class="coauthor-name">Coautor F</div>
-            <div class="coauthor-affil">MIT / Outra Inst.</div>
-          </div>
-        </a>
-      </div>
-    </div>
-
-  </main>
 </div>
 
-<script>
-  // ── BAR CHART (dados de exemplo) ──
-  const data = [
-    { year: 2015, count: 12 },
-    { year: 2016, count: 28 },
-    { year: 2017, count: 45 },
-    { year: 2018, count: 60 },
-    { year: 2019, count: 95 },
-    { year: 2020, count: 140 },
-    { year: 2021, count: 198 },
-    { year: 2022, count: 230 },
-    { year: 2023, count: 260 },
-    { year: 2024, count: 172 },
-  ];
-
-  const max = Math.max(...data.map(d => d.count));
-  const chart = document.getElementById('barChart');
-
-  data.forEach(d => {
-    const pct = (d.count / max) * 100;
-    const wrap = document.createElement('div');
-    wrap.className = 'bar-wrap';
-    wrap.innerHTML = `
-      <div class="bar" style="height:${pct}%" title="${d.year}: ${d.count} citações"></div>
-      <span class="bar-year">${d.year}</span>
-    `;
-    chart.appendChild(wrap);
-  });
-</script>
 </body>
 </html>
